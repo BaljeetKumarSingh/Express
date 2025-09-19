@@ -20,5 +20,17 @@ app.get("/", (req, res) => {
 app.get("/:username/:id", (req, res) => {
   console.log(req.params); // { username: 'apple', id: '123' }
   let { username, id } = req.params;
-  res.send(`Welcome to the page of @${username}!`);
+  res.send(`<h1>Welcome to the page of @${username}!</h1>`);
+});
+
+// query String
+// url: http://localhost:8080/search?q=apple&color=green
+app.get("/search", (req, res) => {
+  console.log(req.query); // { q: 'apple', color: 'green' }
+  let { q } = req.query;
+  if (!q) {
+    res.send("<h1>Nothing Searched!</h1>");
+  } else {
+    res.send(`<h1>search result for query: ${q}</h1>`);
+  }
 });
