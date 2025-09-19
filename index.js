@@ -15,24 +15,10 @@ app.get("/", (req, res) => {
   res.send("you contacted root path");
 });
 
-app.get("/search", (req, res) => {
-  res.send("you contacted search path");
-});
+// path parameters
 
-app.get("/about", (req, res) => {
-  res.send("you contacted about path");
-});
-
-app.get("/home", (req, res) => {
-  res.send("you contacted home path");
-});
-
-// here we are creating post type response
-app.post("/", (req, res) => {
-  res.send("this is root post response!");
-});
-
-// custome response for paths other than the sepcified path
-app.use((req, res) => {
-  res.status(404).send("this path does not exist!");
+app.get("/:username/:id", (req, res) => {
+  console.log(req.params); // { username: 'apple', id: '123' }
+  let { username, id } = req.params;
+  res.send(`Welcome to the page of @${username}!`);
 });
