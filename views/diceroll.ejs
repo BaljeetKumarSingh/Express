@@ -7,5 +7,9 @@
   </head>
   <body>
     <h1>Number at the top of Dice is: <%= diceroll %></h1>
+    <!--embeding conditional statement in ejs-->
+    <% if(diceroll == 6) { %>
+    <h2>Nice! Roll Dice again</h2>
+    <% } %>
   </body>
 </html>
