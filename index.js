@@ -1,36 +1,29 @@
-const express = require("express"); // this return a function
+const express = require("express");
+const path = require("path");
+
 const app = express();
 
 const port = 8080;
 
-app.listen(port, (error) => {
-  if (!error)
-    console.log(
-      `Server is Successfully Running, and App is listening on port ${port}`
-    );
-  else console.log(`error occurred, server can't start ${error}`);
-});
+//telling Express to use EJS as the view engine.
+// view engine -> is a special setting in Express that tells it which template engine to use.
+// ejs -> let you write HTML mixed with JS
+app.set("view engine", "ejs"); // this is aka templeting
+
+// if we try to run our server from parent folder of cwd it will throw an error : Failed to lookup view "home.ejs" in views directory "D:\Dev\Backend\views"
+// b/c express try for look for views in dir "D:\Dev\Backend\views"
+// to overcome this error we explicitly (hardcoded) define the path of our views dir.
+
+app.set("views", path.join(__dirname, "/views"));
 
 app.get("/", (req, res) => {
-  res.send("you contacted root path");
+  res.render("home.ejs");
 });
 
-// path parameters
-
-app.get("/:username/:id", (req, res) => {
-  console.log(req.params); // { username: 'apple', id: '123' }
-  let { username, id } = req.params;
-  res.send(`<h1>Welcome to the page of @${username}!</h1>`);
+app.get("/about", (req, res) => {
+  res.send("this is about page");
 });
 
-// query String
-// url: http://localhost:8080/search?q=apple&color=green
-app.get("/search", (req, res) => {
-  console.log(req.query); // { q: 'apple', color: 'green' }
-  let { q } = req.query;
-  if (!q) {
-    res.send("<h1>Nothing Searched!</h1>");
-  } else {
-    res.send(`<h1>search result for query: ${q}</h1>`);
-  }
+app.listen(port, (e) => {
+  console.log(`Listening on port ${port}`);
 });
