@@ -27,3 +27,8 @@ app.get("/about", (req, res) => {
 app.listen(port, (e) => {
   console.log(`Listening on port ${port}`);
 });
+
+app.get("/diceroll", (req, res) => {
+  let diceroll = Math.floor(Math.random() * 6 + 1); // this will provide random value b/w 1 to 6
+  res.render("diceroll.ejs", { diceroll }); // {diceroll} -> {diceroll: diceroll}, we can also change the key name
+});
