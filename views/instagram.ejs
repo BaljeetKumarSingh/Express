@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instagram</title>
-  </head>
+<!--Outputs the unescaped value (Raw output) into the template-->
+<!--Includes are relative to the template with the include call. (This requires the 'filename' option.) -->
+<!--include is used as a template -->
+
+<%- include("includes/head.ejs") %>
   <body>
     <h1>This page belongs to @<%= data.name %></h1>
     <button>Follow</button>
@@ -28,5 +26,6 @@
       </div>
       <% } %>
     </div>
+    <%- include("includes/footer.ejs") %>
   </body>
 </html>
